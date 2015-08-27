@@ -60,6 +60,11 @@ tufte_handout <- function(fig_width = 4,
                       "",
                       paste("\\caption{", options$fig.cap, "}\n", sep = ""))
     
+    # determine label (if any)
+    label <- ifelse(is.null(options$fig.lbl), 
+                    "",
+                    paste("\\label{", options$fig.lbl, "}\n", sep = ""))
+    
     # determine figure type
     if (isTRUE(options$fig.margin)) 
       figtype <- "marginfigure"
@@ -70,7 +75,7 @@ tufte_handout <- function(fig_width = 4,
     
     # return the latex
     paste(sprintf('\\begin{%s}\n \\includegraphics{%s}\n%s\\end{%s}\n',
-                  figtype, x, caption, figtype))
+                  figtype, x, caption, label, figtype))
   }
   
   # override the knitr settings of the base format and return the format
